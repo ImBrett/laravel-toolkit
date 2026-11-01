@@ -1,0 +1,36 @@
+{
+  "name": "imbrett/laravel-temporal",
+  "version": "1.1.0",
+  "description": "Temporal attribute toolkit for versioned Eloquent data in Laravel.",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "require": {
+    "php": "^8.2",
+    "illuminate/support": "^11.0|^12.0|^13.0",
+    "illuminate/database": "^11.0|^12.0|^13.0"
+  },
+  "require-dev": {
+    "nunomaduro/collision": "^8.0",
+    "orchestra/testbench": "^9.0|^10.0|^11.0",
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "ImBrett\\LaravelTemporal\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ImBrett\\LaravelTemporal\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "ImBrett\\LaravelTemporal\\Providers\\TemporalServiceProvider"
+      ]
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+	"name": "imbrett/laravel-toolkit-shared",
+	"version": "1.0.0",
+	"description": "",
+	"require": {
+		"php": "^8.5"
+	},
+	"require-dev": {
+		"ergebnis/composer-normalize": "^2.29",
+		"icanhazstring/composer-unused": "^0.8",
+		"maglnet/composer-require-checker": "^4.5",
+		"roave/security-advisories": "dev-latest"
+	},
+	"config": {
+		"allow-plugins": true,
+		"platform": {
+			"php": "8.5.12"
+		},
+		"preferred-install": {
+			"*": "dist"
+		},
+		"sort-packages": true
+	}
+}

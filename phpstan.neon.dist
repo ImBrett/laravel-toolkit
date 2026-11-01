@@ -1,0 +1,21 @@
+parameters:
+    level: 8
+    paths:
+        - packages/ApiQuery/src
+        - packages/CachedPaginator/src
+        - packages/ListenerAttributes/src
+        - packages/Sluggable/src
+        - packages/Temporal/src
+    excludePaths:
+        analyseAndScan:
+            - packages/*/vendor
+            - */vendor/*
+    ignoreErrors:
+        - '#AccountBalance::account#'
+        - '#Call to function is_string\(\) with string will always evaluate#'
+        - '#does not specify its types: TRelatedModel, TDeclaringModel#'
+        - identifier: trait.unused
+        - identifier: ignore.unmatchedLine
+    reportUnmatchedIgnoredErrors: false
+    editorUrl: '%%file%%:%%line%%'
+    checkExplicitMixed: false
