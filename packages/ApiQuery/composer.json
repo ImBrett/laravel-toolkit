@@ -1,0 +1,38 @@
+{
+  "name": "imbrett/laravel-api-query",
+  "description": "Composable query scopes for searching, filtering, and sorting Eloquent models via request data.",
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://github.com/ImBrett/laravel-toolkit",
+  "support": {
+    "issues": "https://github.com/ImBrett/laravel-toolkit/issues"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "require": {
+    "php": "^8.2",
+    "illuminate/support": "^11.0|^12.0|^13.0",
+    "illuminate/database": "^11.0|^12.0|^13.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^9.0|^10.0|^11.0",
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "ImBrett\\LaravelApiQuery\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ImBrett\\LaravelApiQuery\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "ImBrett\\LaravelApiQuery\\Providers\\ApiQueryServiceProvider"
+      ]
+    }
+  }
+}

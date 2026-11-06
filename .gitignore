@@ -1,0 +1,17 @@
+# Dependencies
+**/vendor/
+node_modules/
+
+# Caches and tooling artifacts
+.phpunit.cache/
+.phpstan/
+.ecs_cache/
+.idea/
+.vscode/
+*.cache
+
+# OS / env
+.DS_Store
+.env
+.env.*
+!.env.example

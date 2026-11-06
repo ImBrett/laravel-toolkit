@@ -1,0 +1,18 @@
+<?php declare(strict_types=1);
+
+namespace App\Models;
+
+use ImBrett\LaravelTemporal\Models\TemporalModel;
+
+class {{ class }} extends TemporalModel
+{
+    public function temporalColumns(): array
+    {
+        return {{ columns }};
+    }
+
+    public function temporalForeignKey(): string
+    {
+        return '{{ foreignKey }}';
+    }
+}

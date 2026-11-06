@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.0/phpunit.xsd"
+         backupGlobals="false"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         testdox="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutOutputDuringTests="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         cacheDirectory=".phpunit.cache"
+         defaultTestSuite="Packages"
+>
+    <testsuites>
+        <testsuite name="Packages">
+            <directory suffix="Test.php">./packages/*/tests</directory>
+        </testsuite>
+        <testsuite name="Temporal">
+            <directory suffix="Test.php">./packages/Temporal/tests</directory>
+        </testsuite>
+        <testsuite name="CachedPaginator">
+            <directory suffix="Test.php">./packages/CachedPaginator/tests</directory>
+        </testsuite>
+        <testsuite name="ApiQuery">
+            <directory suffix="Test.php">./packages/ApiQuery/tests</directory>
+        </testsuite>
+        <testsuite name="ListenerAttributes">
+            <directory suffix="Test.php">./packages/ListenerAttributes/tests</directory>
+        </testsuite>
+        <testsuite name="Sluggable">
+            <directory suffix="Test.php">./packages/Sluggable/tests</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">./packages/Temporal/src</directory>
+            <directory suffix=".php">./packages/CachedPaginator/src</directory>
+            <directory suffix=".php">./packages/ApiQuery/src</directory>
+            <directory suffix=".php">./packages/Sluggable/src</directory>
+        </include>
+        <exclude>
+            <directory>./vendor</directory>
+            <directory>./_impl</directory>
+            <directory>./packages/*/vendor</directory>
+            <directory>./packages/*/tests</directory>
+        </exclude>
+    </source>
+</phpunit>

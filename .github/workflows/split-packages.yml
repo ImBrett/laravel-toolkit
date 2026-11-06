@@ -1,0 +1,78 @@
+name: Split packages
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: split-${{ matrix.repository }}
+      cancel-in-progress: false
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - directory: packages/ApiQuery
+            repository: laravel-api-query
+            description: Composable query scopes for searching, filtering, and sorting Eloquent models via request data.
+          - directory: packages/ListenerAttributes
+            repository: laravel-listener-attributes
+            description: Attribute-driven event listener registration for Laravel.
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer
+
+      - name: Validate composer.json
+        working-directory: ${{ matrix.directory }}
+        run: composer validate --no-check-lock
+
+      - name: Split and push mirror
+        env:
+          TOKEN: ${{ secrets.MIRROR_PUSH_TOKEN }}
+          DIRECTORY: ${{ matrix.directory }}
+          REPOSITORY: ${{ matrix.repository }}
+          DESCRIPTION: ${{ matrix.description }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${TOKEN}" ]; then
+            echo "MIRROR_PUSH_TOKEN is not set. Add a personal access token that can create and push the mirror repositories."
+            exit 1
+          fi
+
+          export GH_TOKEN="${TOKEN}"
+          export GH_PROMPT_DISABLED=1
+          mirror="ImBrett/${REPOSITORY}"
+
+          if ! gh repo view "${mirror}" >/dev/null 2>&1; then
+            # Create from outside the monorepo checkout so gh does not attach a remote here.
+            (
+              cd /tmp
+              gh repo create "${mirror}" --public --description "${DESCRIPTION}" --disable-issues
+            )
+          fi
+
+          split_branch="split/${REPOSITORY}"
+          git subtree split --prefix="${DIRECTORY}" -b "${split_branch}"
+          split_sha="$(git rev-parse "${split_branch}")"
+          remote="https://x-access-token:${TOKEN}@github.com/ImBrett/${REPOSITORY}.git"
+
+          git push "${remote}" "${split_sha}:refs/heads/main"
+
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            tag="${GITHUB_REF#refs/tags/}"
+            git push "${remote}" "${split_sha}:refs/tags/${tag}"
+          fi
