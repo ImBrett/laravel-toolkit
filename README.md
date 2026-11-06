@@ -70,7 +70,7 @@ Development checklist
 - Scope your changes to a single package when possible.
 - Run `make test TEST_ARGS="--testsuite=<Name>"` plus the lint targets before raising a pull request.
 - Add or adjust documentation in `packages/<Name>/docs/` so consumers have up-to-date guidance.
-- Tag releases per package after CI passes and documentation and changelog entries are in place.
+- Tag the monorepo (`vX.Y.Z`) after CI passes and documentation and changelog entries are in place. Pushing that tag splits `imbrett/laravel-api-query` and `imbrett/laravel-listener-attributes` into read-only mirrors for Packagist. Pushes to `main` update `dev-main` on those mirrors.
 
 License
 -------
