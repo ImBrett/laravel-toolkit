@@ -27,6 +27,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -68,6 +69,9 @@ jobs:
           split_branch="split/${REPOSITORY}"
           git subtree split --prefix="${DIRECTORY}" -b "${split_branch}"
           split_sha="$(git rev-parse "${split_branch}")"
+          # Checkout's saved GITHUB_TOKEN header authenticates as github-actions[bot]
+          # and overrides the token embedded in the push URL.
+          git config --local --unset-all http.https://github.com/.extraheader || true
           remote="https://x-access-token:${TOKEN}@github.com/ImBrett/${REPOSITORY}.git"
 
           git push "${remote}" "${split_sha}:refs/heads/main"
